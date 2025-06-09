@@ -39,7 +39,7 @@ namespace PaintCeunah
             canvasPanel.Paint += CanvasPanel_Paint;
             panel1.Paint += panel1_Paint;
             btnColor.BackColor = currentFillColor;
-btnBorderColor.BackColor = currentBorderColor;
+            btnBorderColor.BackColor = currentBorderColor;
             tempBitmap = new Bitmap(canvasPanel.Width, canvasPanel.Height);
             canvasPanel.Image = tempBitmap;
         }
@@ -53,60 +53,67 @@ btnBorderColor.BackColor = currentBorderColor;
                 isDrawing = true;
 
                 switch (currentActiveShape)
-{
-    case EnumShape.CIRCLE:
-        tempShape = new Circle(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        isCircle = (e.Button == MouseButtons.Right) ? false : true;
-        break;
+                {
+                    case EnumShape.CIRCLE:
+                        tempShape = new Circle(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        isCircle = (e.Button == MouseButtons.Right) ? false : true;
+                        break;
 
-    case EnumShape.SQUARE:
-        tempShape = new Square(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.SQUARE:
+                        tempShape = new Square(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
-    case EnumShape.RECTANGLE:
-        tempShape = new RectangleDrawer(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.RECTANGLE:
+                        tempShape = new RectangleDrawer(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
-    case EnumShape.LINE:
-        tempShape = new LineDrawer(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.LINE:
+                        tempShape = new LineDrawer(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
-    case EnumShape.PENCIL:
-        tempShape = new Pencil(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.PENCIL:
+                        tempShape = new Pencil(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
-    case EnumShape.ERASER:
-        tempShape = new Pencil(currentActiveShape, startPoint, startPoint,
-            Color.White, Color.White, new Pen(Color.White,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.ERASER:
+                        tempShape = new Pencil(currentActiveShape, startPoint, startPoint,
+                            Color.White, Color.White, new Pen(Color.White,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
-    case EnumShape.TRIANGLE:
-        tempShape = new Triangle(currentActiveShape, startPoint, startPoint,
-            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
-            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
-        break;
+                    case EnumShape.TRIANGLE:
+                        tempShape = new Triangle(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
+
                     case EnumShape.HEXAGON:
                         tempShape = new Hexagon(currentActiveShape, startPoint, startPoint,
                             currentFillColor, currentBorderColor, new Pen(currentBorderColor,
                             (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
                         break;
 
-                    default:
-        // Tidak ada aksi
-        break;
-}
+                    // ⭐ TAMBAH CASE STAR
+                    case EnumShape.STAR:
+                        tempShape = new Star(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
 
+                    default:
+                        // Tidak ada aksi
+                        break;
+                }
             }
         }
 
@@ -216,6 +223,15 @@ btnBorderColor.BackColor = currentBorderColor;
             {
                 btnTriangle.BackColor = Color.Aqua;
             }
+            else if (currentActiveShape == EnumShape.HEXAGON)
+            {
+                btnHexagon.BackColor = Color.Aqua;
+            }
+            // ⭐ TAMBAH HIGHLIGHT UNTUK STAR
+            else if (currentActiveShape == EnumShape.STAR)
+            {
+                btnStar.BackColor = Color.Aqua;
+            }
         }
 
         private void btnSquare_Click(object sender, EventArgs e)
@@ -276,26 +292,26 @@ btnBorderColor.BackColor = currentBorderColor;
             }
         }
 
-private void btnBorderColor_Click(object sender, EventArgs e)
-{
-    Thread colorThread = new Thread(() =>
-    {
-        using (ColorDialog cd = new ColorDialog())
+        private void btnBorderColor_Click(object sender, EventArgs e)
         {
-            if (cd.ShowDialog() == DialogResult.OK)
+            Thread colorThread = new Thread(() =>
             {
-                this.Invoke((MethodInvoker)delegate
+                using (ColorDialog cd = new ColorDialog())
                 {
-                    currentBorderColor = cd.Color;
-                    strokeColor = currentBorderColor;
-                    btnBorderColor.BackColor = currentBorderColor; // update warna tombol
-                });
-            }
+                    if (cd.ShowDialog() == DialogResult.OK)
+                    {
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            currentBorderColor = cd.Color;
+                            strokeColor = currentBorderColor;
+                            btnBorderColor.BackColor = currentBorderColor; // update warna tombol
+                        });
+                    }
+                }
+            });
+            colorThread.SetApartmentState(ApartmentState.STA);
+            colorThread.Start();
         }
-    });
-    colorThread.SetApartmentState(ApartmentState.STA);
-    colorThread.Start();
-}
 
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -512,6 +528,14 @@ private void btnBorderColor_Click(object sender, EventArgs e)
         private void btnHexagon_Click(object sender, EventArgs e)
         {
             currentActiveShape = EnumShape.HEXAGON;
+            panel1.Invalidate();
+            panel1.Refresh();
+        }
+
+        // ⭐ TAMBAH EVENT HANDLER STAR
+        private void btnStar_Click(object sender, EventArgs e)
+        {
+            currentActiveShape = EnumShape.STAR;
             panel1.Invalidate();
             panel1.Refresh();
         }

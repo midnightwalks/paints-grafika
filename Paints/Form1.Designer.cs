@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnStar = new System.Windows.Forms.Button();        // ⭐ TAMBAH INI
+            this.panel25 = new System.Windows.Forms.Panel();         // ⭐ TAMBAH INI
             this.btnHexagon = new System.Windows.Forms.Button();
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnTriangle = new System.Windows.Forms.Button();
@@ -98,6 +100,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnStar);              // ⭐ TAMBAH INI
+            this.panel1.Controls.Add(this.panel25);              // ⭐ TAMBAH INI
             this.panel1.Controls.Add(this.btnHexagon);
             this.panel1.Controls.Add(this.panel24);
             this.panel1.Controls.Add(this.btnTriangle);
@@ -784,6 +788,7 @@
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Button btnHexagon;
         private System.Windows.Forms.Panel panel24;
+        private System.Windows.Forms.Button btnStar;          
+        private System.Windows.Forms.Panel panel25;           
     }
 }
-
