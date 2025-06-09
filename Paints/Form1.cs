@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -31,6 +32,21 @@ namespace PaintCeunah
         public Form1()
         {
             InitializeComponent();
+            // Load star image manually
+            try
+            {
+                string imagePath = Path.Combine(Application.StartupPath, "Resources", "star.jpg");
+                if (File.Exists(imagePath))
+                {
+                    btnStar.Image = Image.FromFile(imagePath);
+                    btnStar.ImageAlign = ContentAlignment.MiddleCenter;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Fallback to text if image not found
+                btnStar.Text = "⭐";
+            }
             this.DoubleBuffered = true;
             tumpukanGambar = new List<Shape>();
             canvasPanel.MouseDown += CanvasPanel_MouseDown;

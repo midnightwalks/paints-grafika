@@ -100,7 +100,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnStar);             
+            this.panel1.Controls.Add(this.btnStar);              
             this.panel1.Controls.Add(this.panel25);              
             this.panel1.Controls.Add(this.btnHexagon);
             this.panel1.Controls.Add(this.panel24);
@@ -131,6 +131,27 @@
             this.panel1.Size = new System.Drawing.Size(1446, 172);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // btnStar
+            // 
+            this.btnStar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStar.Image = global::PaintCeunah.Properties.Resources.star;
+            this.btnStar.Location = new System.Drawing.Point(723, 80);
+            this.btnStar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnStar.Name = "btnStar";
+            this.btnStar.Size = new System.Drawing.Size(56, 92);
+            this.btnStar.TabIndex = 27;
+            this.btnStar.UseVisualStyleBackColor = true;
+            this.btnStar.Click += new System.EventHandler(this.btnStar_Click);
+            // 
+            // panel25
+            // 
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel25.Location = new System.Drawing.Point(706, 80);
+            this.panel25.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(17, 92);
+            this.panel25.TabIndex = 26;
             // 
             // btnHexagon
             // 
