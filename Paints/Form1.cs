@@ -234,7 +234,7 @@ namespace PaintCeunah
             }
             else if (currentActiveShape == EnumShape.PENTAGON)
             {
-                btnStar.BackColor = Color.Aqua;
+                btnPentagon.BackColor = Color.Aqua;
             }
             else if (currentActiveShape == EnumShape.DIAMOND)
             {
@@ -547,7 +547,7 @@ namespace PaintCeunah
             panel1.Refresh();
         }
 
-        private void btnStar_Click(object sender, EventArgs e)
+        private void btnPentagon_Click(object sender, EventArgs e)
         {
             currentActiveShape = EnumShape.PENTAGON;
             panel1.Invalidate();

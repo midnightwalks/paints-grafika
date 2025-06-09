@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDiamond = new System.Windows.Forms.Button();    
             this.panel26 = new System.Windows.Forms.Panel();        
-            this.btnStar = new System.Windows.Forms.Button();
+            this.btnPentagon = new System.Windows.Forms.Button();
             this.panel25 = new System.Windows.Forms.Panel();
             this.btnHexagon = new System.Windows.Forms.Button();
             this.panel24 = new System.Windows.Forms.Panel();
@@ -104,7 +104,7 @@
             // 
             this.panel1.Controls.Add(this.btnDiamond);          
             this.panel1.Controls.Add(this.panel26);            
-            this.panel1.Controls.Add(this.btnStar);
+            this.panel1.Controls.Add(this.btnPentagon);
             this.panel1.Controls.Add(this.panel25);
             this.panel1.Controls.Add(this.btnHexagon);
             this.panel1.Controls.Add(this.panel24);
@@ -157,17 +157,17 @@
             this.panel26.Size = new System.Drawing.Size(17, 92);
             this.panel26.TabIndex = 28;
             // 
-            // btnStar
+            // btnPentagon
             // 
-            this.btnStar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStar.Location = new System.Drawing.Point(723, 80);
-            this.btnStar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnStar.Name = "btnStar";
-            this.btnStar.Size = new System.Drawing.Size(56, 92);
-            this.btnStar.TabIndex = 27;
-            this.btnStar.Text = "⭐";
-            this.btnStar.UseVisualStyleBackColor = true;
-            this.btnStar.Click += new System.EventHandler(this.btnStar_Click);
+            this.btnPentagon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPentagon.Location = new System.Drawing.Point(723, 80);
+            this.btnPentagon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPentagon.Name = "btnPentagon";
+            this.btnPentagon.Size = new System.Drawing.Size(56, 92);
+            this.btnPentagon.TabIndex = 27;
+            this.btnPentagon.Text = "⬠";
+            this.btnPentagon.UseVisualStyleBackColor = true;
+            this.btnPentagon.Click += new System.EventHandler(this.btnPentagon_Click);
             // 
             // panel25
             // 
@@ -755,7 +755,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
-            this.Text = "PaintCeunah";
+            this.Text = "PaintGo";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panel1.ResumeLayout(false);
             this.panel19.ResumeLayout(false);
@@ -834,7 +834,7 @@
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Button btnHexagon;
         private System.Windows.Forms.Panel panel24;
-        private System.Windows.Forms.Button btnStar;
+        private System.Windows.Forms.Button btnPentagon;
         private System.Windows.Forms.Panel panel25;
         private System.Windows.Forms.Button btnDiamond;      
         private System.Windows.Forms.Panel panel26;          
