@@ -44,10 +44,13 @@ namespace PaintCeunah.models
                 matrix.RotateAt(RotationAngle, new PointF(centerX, centerY));
             }
             
-            // Apply scaling
+            // Apply scaling (manual implementation since ScaleAt doesn't exist in .NET Framework 4.8)
             if (ScaleFactor != 1.0f)
             {
-                matrix.ScaleAt(ScaleFactor, ScaleFactor, new PointF(centerX, centerY));
+                // Translate to origin, scale, then translate back
+                matrix.Translate(-centerX, -centerY);
+                matrix.Scale(ScaleFactor, ScaleFactor);
+                matrix.Translate(centerX, centerY);
             }
 
             // Transform points
@@ -65,7 +68,7 @@ namespace PaintCeunah.models
                 }
 
                 // Draw the star outline
-                g.DrawPolygon(Pen, starPoints);
+                g.DrawPolygon(BorderPen, starPoints);
             }
             finally
             {
