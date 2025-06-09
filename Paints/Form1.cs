@@ -109,6 +109,12 @@ namespace PaintCeunah
                             (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
                         break;
 
+                    case EnumShape.DIAMOND:
+                        tempShape = new Diamond(currentActiveShape, startPoint, startPoint,
+                            currentFillColor, currentBorderColor, new Pen(currentBorderColor,
+                            (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
+                        break;
+
                     default:
                         // Tidak ada aksi
                         break;
@@ -229,6 +235,10 @@ namespace PaintCeunah
             else if (currentActiveShape == EnumShape.PENTAGON)
             {
                 btnStar.BackColor = Color.Aqua;
+            }
+            else if (currentActiveShape == EnumShape.DIAMOND)
+            {
+                btnDiamond.BackColor = Color.Aqua;
             }
         }
 
@@ -540,6 +550,13 @@ namespace PaintCeunah
         private void btnStar_Click(object sender, EventArgs e)
         {
             currentActiveShape = EnumShape.PENTAGON;
+            panel1.Invalidate();
+            panel1.Refresh();
+        }
+
+        private void btnDiamond_Click(object sender, EventArgs e)
+        {
+            currentActiveShape = EnumShape.DIAMOND;
             panel1.Invalidate();
             panel1.Refresh();
         }

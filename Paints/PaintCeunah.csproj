@@ -66,6 +66,7 @@
     <Compile Include="models\Triangle.cs" />
     <Compile Include="models\Hexagon.cs" />
     <Compile Include="models\Pentagon.cs" />
+    <Compile Include="models\Diamond.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -30,8 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnStar = new System.Windows.Forms.Button();        
-            this.panel25 = new System.Windows.Forms.Panel();         
+            this.btnDiamond = new System.Windows.Forms.Button();    
+            this.panel26 = new System.Windows.Forms.Panel();        
+            this.btnStar = new System.Windows.Forms.Button();
+            this.panel25 = new System.Windows.Forms.Panel();
             this.btnHexagon = new System.Windows.Forms.Button();
             this.panel24 = new System.Windows.Forms.Panel();
             this.btnTriangle = new System.Windows.Forms.Button();
@@ -100,8 +102,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnStar);              
-            this.panel1.Controls.Add(this.panel25);              
+            this.panel1.Controls.Add(this.btnDiamond);          
+            this.panel1.Controls.Add(this.panel26);            
+            this.panel1.Controls.Add(this.btnStar);
+            this.panel1.Controls.Add(this.panel25);
             this.panel1.Controls.Add(this.btnHexagon);
             this.panel1.Controls.Add(this.panel24);
             this.panel1.Controls.Add(this.btnTriangle);
@@ -132,6 +136,27 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
+            // btnDiamond
+            // 
+            this.btnDiamond.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDiamond.Location = new System.Drawing.Point(796, 80);
+            this.btnDiamond.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDiamond.Name = "btnDiamond";
+            this.btnDiamond.Size = new System.Drawing.Size(56, 92);
+            this.btnDiamond.TabIndex = 29;
+            this.btnDiamond.Text = "♦";
+            this.btnDiamond.UseVisualStyleBackColor = true;
+            this.btnDiamond.Click += new System.EventHandler(this.btnDiamond_Click);
+            // 
+            // panel26
+            // 
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel26.Location = new System.Drawing.Point(779, 80);
+            this.panel26.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(17, 92);
+            this.panel26.TabIndex = 28;
+            // 
             // btnStar
             // 
             this.btnStar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -140,7 +165,7 @@
             this.btnStar.Name = "btnStar";
             this.btnStar.Size = new System.Drawing.Size(56, 92);
             this.btnStar.TabIndex = 27;
-            this.btnStar.Text = "⬟";
+            this.btnStar.Text = "⭐";
             this.btnStar.UseVisualStyleBackColor = true;
             this.btnStar.Click += new System.EventHandler(this.btnStar_Click);
             // 
@@ -809,7 +834,9 @@
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Button btnHexagon;
         private System.Windows.Forms.Panel panel24;
-        private System.Windows.Forms.Button btnStar;          
-        private System.Windows.Forms.Panel panel25;          
+        private System.Windows.Forms.Button btnStar;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.Button btnDiamond;      
+        private System.Windows.Forms.Panel panel26;          
     }
 }

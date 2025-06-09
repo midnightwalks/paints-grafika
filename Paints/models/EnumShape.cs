@@ -17,6 +17,7 @@ namespace PaintCeunah.models
         TRIANGLE,
         HEXAGON,
         PENTAGON,
+        DIAMOND,
         NONE
     }
 }
