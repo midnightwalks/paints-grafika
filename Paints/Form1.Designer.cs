@@ -676,7 +676,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "123210130 - 123210136";
+            this.label1.Text = "123220150 - 123220205";
             // 
             // canvasPanel
             // 
