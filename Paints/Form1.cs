@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -32,21 +31,6 @@ namespace PaintCeunah
         public Form1()
         {
             InitializeComponent();
-            // Load star image manually
-            try
-            {
-                string imagePath = Path.Combine(Application.StartupPath, "Resources", "star.jpg");
-                if (File.Exists(imagePath))
-                {
-                    btnStar.Image = Image.FromFile(imagePath);
-                    btnStar.ImageAlign = ContentAlignment.MiddleCenter;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Fallback to text if image not found
-                btnStar.Text = "⭐";
-            }
             this.DoubleBuffered = true;
             tumpukanGambar = new List<Shape>();
             canvasPanel.MouseDown += CanvasPanel_MouseDown;
@@ -432,21 +416,24 @@ namespace PaintCeunah
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
             {
                 e.Handled = true;
-                translationX = int.Parse(tbMoveX.Text);
+                if (!string.IsNullOrEmpty(tbMoveX.Text))
+                    translationX = int.Parse(tbMoveX.Text);
             }
 
             // Izinkan tanda minus hanya di posisi pertama
             if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
             {
                 e.Handled = true;
-                translationX = int.Parse(tbMoveX.Text);
+                if (!string.IsNullOrEmpty(tbMoveX.Text))
+                    translationX = int.Parse(tbMoveX.Text);
             }
 
             // Tidak izinkan lebih dari satu tanda minus
             if (e.KeyChar == '-' && (sender as TextBox).Text.IndexOf('-') > -1)
             {
                 e.Handled = true;
-                translationX = int.Parse(tbMoveX.Text);
+                if (!string.IsNullOrEmpty(tbMoveX.Text))
+                    translationX = int.Parse(tbMoveX.Text);
             }
         }
 
@@ -456,21 +443,24 @@ namespace PaintCeunah
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
             {
                 e.Handled = true;
-                translationY = int.Parse(tbMoveY.Text);
+                if (!string.IsNullOrEmpty(tbMoveY.Text))
+                    translationY = int.Parse(tbMoveY.Text);
             }
 
             // Izinkan tanda minus hanya di posisi pertama
             if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
             {
                 e.Handled = true;
-                translationY = int.Parse(tbMoveY.Text);
+                if (!string.IsNullOrEmpty(tbMoveY.Text))
+                    translationY = int.Parse(tbMoveY.Text);
             }
 
             // Tidak izinkan lebih dari satu tanda minus
             if (e.KeyChar == '-' && (sender as TextBox).Text.IndexOf('-') > -1)
             {
                 e.Handled = true;
-                translationY = int.Parse(tbMoveY.Text);
+                if (!string.IsNullOrEmpty(tbMoveY.Text))
+                    translationY = int.Parse(tbMoveY.Text);
             }
         }
 
@@ -479,7 +469,8 @@ namespace PaintCeunah
             try
             {
                 translationX = int.Parse(tbMoveX.Text);
-            }catch(Exception ex)
+            }
+            catch
             {
                 translationX = 0;
             }
@@ -491,7 +482,7 @@ namespace PaintCeunah
             {
                 translationY = int.Parse(tbMoveY.Text);
             }
-            catch (Exception ex)
+            catch
             {
                 translationY = 0;
             }

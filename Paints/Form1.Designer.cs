@@ -135,12 +135,12 @@
             // btnStar
             // 
             this.btnStar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStar.Image = global::PaintCeunah.Properties.Resources.star;
             this.btnStar.Location = new System.Drawing.Point(723, 80);
             this.btnStar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStar.Name = "btnStar";
             this.btnStar.Size = new System.Drawing.Size(56, 92);
             this.btnStar.TabIndex = 27;
+            this.btnStar.Text = "⭐";
             this.btnStar.UseVisualStyleBackColor = true;
             this.btnStar.Click += new System.EventHandler(this.btnStar_Click);
             // 
@@ -810,6 +810,6 @@
         private System.Windows.Forms.Button btnHexagon;
         private System.Windows.Forms.Panel panel24;
         private System.Windows.Forms.Button btnStar;          
-        private System.Windows.Forms.Panel panel25;           
+        private System.Windows.Forms.Panel panel25;          
     }
 }

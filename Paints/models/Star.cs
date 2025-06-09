@@ -1,71 +1,97 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PaintCeunah.models
 {
     public class Star : Shape
     {
-        private int numberOfPoints = 5;
-
-        public Star(EnumShape shapeType, Point startPoint, Point endPoint, Color fillColor, Color borderColor, Pen borderWidth, float rotationAngle = 0)
-            : base(shapeType, startPoint, endPoint, fillColor, borderColor, borderWidth, rotationAngle)
+        public Star(EnumShape shape, Point startPoint, Point endPoint, Color fillColor, Color strokeColor, Pen pen) 
+            : base(shape, startPoint, endPoint, fillColor, strokeColor, pen)
         {
         }
 
-        public override void Draw(Graphics graphics)
+        public override void Draw(Graphics g)
         {
-            Point[] starPoints = GetStarPoints();
+            if (StartPoint == null || EndPoint == null) return;
 
-            // Calculate center point
-            Point centerPoint = new Point(
-                (StartPoint.X + EndPoint.X) / 2 + Translation.X,
-                (StartPoint.Y + EndPoint.Y) / 2 + Translation.Y
-            );
+            // Calculate center and radius
+            int centerX = (StartPoint.X + EndPoint.X) / 2;
+            int centerY = (StartPoint.Y + EndPoint.Y) / 2;
+            int radius = Math.Max(Math.Abs(EndPoint.X - StartPoint.X), Math.Abs(EndPoint.Y - StartPoint.Y)) / 2;
+
+            if (radius <= 0) return;
+
+            // Create star points (5-pointed star)
+            PointF[] starPoints = CreateStarPoints(centerX, centerY, radius, radius / 2, 5);
 
             // Apply transformations
-            Matrix transformationMatrix = new Matrix();
-            transformationMatrix.Translate(Translation.X, Translation.Y);
-            transformationMatrix.RotateAt(RotationAngle, centerPoint);
-            graphics.Transform = transformationMatrix;
-
-            // Apply scaling
-            ApplyScaleTransform(graphics, centerPoint);
-
-            // Draw star
-            graphics.DrawPolygon(BorderWidth, starPoints);
-            graphics.FillPolygon(BrushColor, starPoints);
-
-            graphics.ResetTransform();
-        }
-
-        private Point[] GetStarPoints()
-        {
-            int width = Math.Abs(EndPoint.X - StartPoint.X);
-            int height = Math.Abs(EndPoint.Y - StartPoint.Y);
-
-            int centerX = Math.Min(StartPoint.X, EndPoint.X) + width / 2;
-            int centerY = Math.Min(StartPoint.Y, EndPoint.Y) + height / 2;
-
-            float outerRadius = Math.Min(width, height) / 2f;
-            float innerRadius = outerRadius * 0.4f;
-
-            Point[] points = new Point[numberOfPoints * 2];
-
-            for (int i = 0; i < numberOfPoints * 2; i++)
+            Matrix matrix = new Matrix();
+            
+            // Apply translation
+            if (Translation.X != 0 || Translation.Y != 0)
             {
-                double angleDeg = (360.0 / (numberOfPoints * 2)) * i - 90; // Start from top
-                double angleRad = Math.PI / 180 * angleDeg;
-
-                float radius = (i % 2 == 0) ? outerRadius : innerRadius;
-
-                points[i] = new Point(
-                    centerX + (int)(radius * Math.Cos(angleRad)),
-                    centerY + (int)(radius * Math.Sin(angleRad))
-                );
+                matrix.Translate(Translation.X, Translation.Y);
+            }
+            
+            // Apply rotation around center
+            if (RotationAngle != 0)
+            {
+                matrix.RotateAt(RotationAngle, new PointF(centerX, centerY));
+            }
+            
+            // Apply scaling
+            if (ScaleFactor != 1.0f)
+            {
+                matrix.ScaleAt(ScaleFactor, ScaleFactor, new PointF(centerX, centerY));
             }
 
-            return points;
+            // Transform points
+            matrix.TransformPoints(starPoints);
+
+            // Save graphics state
+            GraphicsState state = g.Save();
+
+            try
+            {
+                // Fill the star
+                using (SolidBrush fillBrush = new SolidBrush(FillColor))
+                {
+                    g.FillPolygon(fillBrush, starPoints);
+                }
+
+                // Draw the star outline
+                g.DrawPolygon(Pen, starPoints);
+            }
+            finally
+            {
+                // Restore graphics state
+                g.Restore(state);
+                matrix.Dispose();
+            }
+        }
+
+        private PointF[] CreateStarPoints(float centerX, float centerY, float outerRadius, float innerRadius, int points)
+        {
+            PointF[] starPoints = new PointF[points * 2];
+            double angleStep = Math.PI / points;
+            double angle = -Math.PI / 2; // Start from top
+
+            for (int i = 0; i < points * 2; i++)
+            {
+                float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+                starPoints[i] = new PointF(
+                    centerX + (float)(Math.Cos(angle) * radius),
+                    centerY + (float)(Math.Sin(angle) * radius)
+                );
+                angle += angleStep;
+            }
+
+            return starPoints;
         }
     }
 }
