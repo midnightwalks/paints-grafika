@@ -103,7 +103,6 @@ namespace PaintCeunah
                             (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
                         break;
 
-                    // ⭐ TAMBAH CASE STAR
                     case EnumShape.STAR:
                         tempShape = new Star(currentActiveShape, startPoint, startPoint,
                             currentFillColor, currentBorderColor, new Pen(currentBorderColor,
@@ -227,7 +226,6 @@ namespace PaintCeunah
             {
                 btnHexagon.BackColor = Color.Aqua;
             }
-            // ⭐ TAMBAH HIGHLIGHT UNTUK STAR
             else if (currentActiveShape == EnumShape.STAR)
             {
                 btnStar.BackColor = Color.Aqua;
@@ -532,7 +530,6 @@ namespace PaintCeunah
             panel1.Refresh();
         }
 
-        // ⭐ TAMBAH EVENT HANDLER STAR
         private void btnStar_Click(object sender, EventArgs e)
         {
             currentActiveShape = EnumShape.STAR;
