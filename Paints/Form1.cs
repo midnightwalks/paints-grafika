@@ -103,8 +103,8 @@ namespace PaintCeunah
                             (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
                         break;
 
-                    case EnumShape.STAR:
-                        tempShape = new Star(currentActiveShape, startPoint, startPoint,
+                    case EnumShape.PENTAGON:
+                        tempShape = new Pentagon(currentActiveShape, startPoint, startPoint,
                             currentFillColor, currentBorderColor, new Pen(currentBorderColor,
                             (tbBorderWidth.Text.Length > 0) ? int.Parse(tbBorderWidth.Text.ToString()) : 5));
                         break;
@@ -226,7 +226,7 @@ namespace PaintCeunah
             {
                 btnHexagon.BackColor = Color.Aqua;
             }
-            else if (currentActiveShape == EnumShape.STAR)
+            else if (currentActiveShape == EnumShape.PENTAGON)
             {
                 btnStar.BackColor = Color.Aqua;
             }
@@ -539,7 +539,7 @@ namespace PaintCeunah
 
         private void btnStar_Click(object sender, EventArgs e)
         {
-            currentActiveShape = EnumShape.STAR;
+            currentActiveShape = EnumShape.PENTAGON;
             panel1.Invalidate();
             panel1.Refresh();
         }

@@ -16,7 +16,7 @@ namespace PaintCeunah.models
         ERASER,
         TRIANGLE,
         HEXAGON,
-        STAR,
+        PENTAGON,
         NONE
     }
 }

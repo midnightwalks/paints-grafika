@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PaintCeunah.models
 {
-    public class Star : Shape
+    public class Pentagon : Shape
     {
-        public Star(EnumShape shape, Point startPoint, Point endPoint, Color fillColor, Color strokeColor, Pen pen) 
+        public Pentagon(EnumShape shape, Point startPoint, Point endPoint, Color fillColor, Color strokeColor, Pen pen) 
             : base(shape, startPoint, endPoint, fillColor, strokeColor, pen)
         {
         }
@@ -26,8 +26,8 @@ namespace PaintCeunah.models
 
             if (radius <= 0) return;
 
-            // Create star points (5-pointed star)
-            PointF[] starPoints = CreateStarPoints(centerX, centerY, radius, radius / 2, 5);
+            // Create pentagon points (5-sided polygon)
+            PointF[] pentagonPoints = CreatePentagonPoints(centerX, centerY, radius);
 
             // Apply transformations
             Matrix matrix = new Matrix();
@@ -44,31 +44,33 @@ namespace PaintCeunah.models
                 matrix.RotateAt(RotationAngle, new PointF(centerX, centerY));
             }
             
-            // Apply scaling (manual implementation since ScaleAt doesn't exist in .NET Framework 4.8)
+            // Apply scaling
             if (ScaleFactor != 1.0f)
             {
-                // Translate to origin, scale, then translate back
                 matrix.Translate(-centerX, -centerY);
                 matrix.Scale(ScaleFactor, ScaleFactor);
                 matrix.Translate(centerX, centerY);
             }
 
             // Transform points
-            matrix.TransformPoints(starPoints);
+            matrix.TransformPoints(pentagonPoints);
 
             // Save graphics state
             GraphicsState state = g.Save();
 
             try
             {
-                // Fill the star
+                // Fill the pentagon
                 using (SolidBrush fillBrush = new SolidBrush(FillColor))
                 {
-                    g.FillPolygon(fillBrush, starPoints);
+                    g.FillPolygon(fillBrush, pentagonPoints);
                 }
 
-                // Draw the star outline
-                g.DrawPolygon(BorderPen, starPoints);
+                // Draw the pentagon outline - buat pen baru untuk menghindari error
+                using (Pen outlinePen = new Pen(Color.Black, 2))
+                {
+                    g.DrawPolygon(outlinePen, pentagonPoints);
+                }
             }
             finally
             {
@@ -78,23 +80,22 @@ namespace PaintCeunah.models
             }
         }
 
-        private PointF[] CreateStarPoints(float centerX, float centerY, float outerRadius, float innerRadius, int points)
+        private PointF[] CreatePentagonPoints(float centerX, float centerY, float radius)
         {
-            PointF[] starPoints = new PointF[points * 2];
-            double angleStep = Math.PI / points;
+            PointF[] pentagonPoints = new PointF[5];
+            double angleStep = 2 * Math.PI / 5; // 72 degrees in radians
             double angle = -Math.PI / 2; // Start from top
 
-            for (int i = 0; i < points * 2; i++)
+            for (int i = 0; i < 5; i++)
             {
-                float radius = (i % 2 == 0) ? outerRadius : innerRadius;
-                starPoints[i] = new PointF(
+                pentagonPoints[i] = new PointF(
                     centerX + (float)(Math.Cos(angle) * radius),
                     centerY + (float)(Math.Sin(angle) * radius)
                 );
                 angle += angleStep;
             }
 
-            return starPoints;
+            return pentagonPoints;
         }
     }
 }

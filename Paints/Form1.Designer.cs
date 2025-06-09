@@ -140,7 +140,7 @@
             this.btnStar.Name = "btnStar";
             this.btnStar.Size = new System.Drawing.Size(56, 92);
             this.btnStar.TabIndex = 27;
-            this.btnStar.Text = "⭐";
+            this.btnStar.Text = "⬟";
             this.btnStar.UseVisualStyleBackColor = true;
             this.btnStar.Click += new System.EventHandler(this.btnStar_Click);
             // 
