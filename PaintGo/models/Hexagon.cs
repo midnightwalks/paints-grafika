@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace PaintCeunah.models
+namespace PaintGo.models
 {
     public class Hexagon : Shape
     {
@@ -13,27 +13,32 @@ namespace PaintCeunah.models
 
         public override void Draw(Graphics graphics)
         {
+            // Hitung titik-titik hexagon
             Point[] points = GetHexagonPoints();
 
-            // get midpoint
-            Point center = new Point(
-                (points[0].X + points[3].X) / 2,
-                (points[0].Y + points[3].Y) / 2
-            );
+            // Hitung titik tengah untuk rotasi dan skala
+            Point center = GetMidPoint();
 
-            // transformasi: translate + rotasi
+            // Buat transformasi kumulatif: Translate → Rotate → Scale
             Matrix transform = new Matrix();
+
+            // Translasi dari pengguna (kumulatif)
             transform.Translate(Translation.X, Translation.Y);
-            transform.RotateAt(RotationAngle, center);
+
+            // Rotasi dan skala terhadap titik tengah
+            transform.Translate(center.X, center.Y);
+            transform.Rotate(-RotationAngle);
+            transform.Scale(ScaleFactor, ScaleFactor);
+            transform.Translate(-center.X, -center.Y);
+
+            // Terapkan transformasi ke grafik
             graphics.Transform = transform;
 
-            // skala
-            ApplyScaleTransform(graphics, center);
-
-            // gambar garis dan isi hexagon
-            graphics.DrawPolygon(BorderWidth, points);
+            // Gambar hexagon
             graphics.FillPolygon(BrushColor, points);
+            graphics.DrawPolygon(BorderWidth, points);
 
+            // Reset transformasi agar tidak mengganggu shape lain
             graphics.ResetTransform();
         }
 
@@ -42,15 +47,15 @@ namespace PaintCeunah.models
             int width = Math.Abs(EndPoint.X - StartPoint.X);
             int height = Math.Abs(EndPoint.Y - StartPoint.Y);
 
-            int centerX = Math.Min(StartPoint.X, EndPoint.X) + width / 2 + Translation.X;
-            int centerY = Math.Min(StartPoint.Y, EndPoint.Y) + height / 2 + Translation.Y;
+            int centerX = Math.Min(StartPoint.X, EndPoint.X) + width / 2;
+            int centerY = Math.Min(StartPoint.Y, EndPoint.Y) + height / 2;
 
             float radius = Math.Min(width, height) / 2f;
 
             Point[] points = new Point[6];
             for (int i = 0; i < 6; i++)
             {
-                double angleDeg = 60 * i - 30; // rotasi agar posisi bawah rata
+                double angleDeg = 60 * i - 30; // agar bagian bawah rata
                 double angleRad = Math.PI / 180 * angleDeg;
                 points[i] = new Point(
                     centerX + (int)(radius * Math.Cos(angleRad)),

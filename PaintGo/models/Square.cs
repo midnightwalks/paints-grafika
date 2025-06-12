@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaintCeunah.models
+namespace PaintGo.models
 {
     public class Square : Shape
     {

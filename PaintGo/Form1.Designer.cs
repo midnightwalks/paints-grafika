@@ -1,4 +1,4 @@
-namespace PaintCeunah
+﻿namespace PaintGo
 {
     partial class Form1
     {

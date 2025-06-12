@@ -1,4 +1,4 @@
-﻿using PaintCeunah.models;
+﻿using PaintGo.models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace PaintCeunah
+namespace PaintGo
 {
     public partial class Form1 : Form
     {
